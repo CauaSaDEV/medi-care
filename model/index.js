@@ -22,7 +22,7 @@ Profissional.hasMany(Consulta, {
 });
 Consulta.belongsTo(Profissional,{
     foreignKey: "medicoId",
-    as: "medico"
+    as: "medicoConsulta"
 });
 
 //!Profissional que agendou consulta, verificar relacionamento.
@@ -57,7 +57,7 @@ Profissional.hasMany(Atendimento, {
 
 Atendimento.belongsTo(Profissional, {
     foreignKey: "medicoId",
-    as: "medico"
+    as: "medicoAtendimento"
 });
 
 module.exports = {
