@@ -91,7 +91,7 @@ router.beforeEach((to, from, next) => {
   const user = JSON.parse(localStorage.getItem('user') || '{}')
 
   if (to.meta.requiresAuth && !token) {
-    return next('/login')
+      return next('/login')
   }
   if (to.name === 'login' && token) {
     return next('/dashboard')
