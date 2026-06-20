@@ -10,7 +10,7 @@ const seedProfissional = async () => {
             {
                 nome: 'Administrador',
                 email: 'admin@medicare.com',
-                senha_hash: await bcrypt.hash('Admin@123', 10),
+                senha_hash: await bcrypt.hash(' ', 10),
                 crm: null,
                 especialidade: null,
                 perfil: 'admin',
