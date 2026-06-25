@@ -1,69 +1,55 @@
-const Profissional = require('./profissional')
-const Paciente = require('./pacientes')
-const Atendimento = require('./atendimento')
-const Consulta = require('./consulta')
+const Profissional = require('./profissional');
+const Paciente = require('./pacientes');
+const Atendimento = require('./atendimento');
+const Consulta = require('./consulta');
 
-// Paciente tem varias consultas
-
-Paciente.hasMany(Consulta,{
+// Paciente tem várias consultas
+Paciente.hasMany(Consulta, {
     foreignKey: 'pacienteId',
-    as: 'consultas'
+    as: 'consultas',
+    onDelete: 'RESTRICT' // Impede exclusão se houver consulta
 });
-Consulta.belongsTo(Paciente,{
+Consulta.belongsTo(Paciente, {
     foreignKey: 'pacienteId',
     as: 'paciente'
 });
 
-// Um Médico pode ter varias consultas
-
+// Um Médico pode ter várias consultas
 Profissional.hasMany(Consulta, {
     foreignKey: "medicoId",
-    as: "consultasMedicas"
+    as: "consultasMedicas",
+    onDelete: 'RESTRICT' // Impede exclusão se houver consulta
 });
-Consulta.belongsTo(Profissional,{
+Consulta.belongsTo(Profissional, {
     foreignKey: "medicoId",
     as: "medicoConsulta"
 });
 
-//!Profissional que agendou consulta, verificar relacionamento.
-
+// Profissional que agendou consulta
 Profissional.hasMany(Consulta, {
     foreignKey: "agendado_por",
-    as: "consultasAgendadas"
+    as: "consultasAgendadas",
+    onDelete: 'RESTRICT'
 });
-
 Consulta.belongsTo(Profissional, {
     foreignKey: "agendado_por",
     as: "agendador"
 });
 
-//Atendimento
-
+// Atendimento
 Consulta.hasOne(Atendimento, {
     foreignKey: "consultaId",
-    as: "atendimento"
+    as: "atendimento",
+    onDelete: 'RESTRICT'
 });
 Atendimento.belongsTo(Consulta, {
     foreignKey: "consultaId", 
     as: "consulta"
 });
 
-//medico realiza varios atendimentos
-
-Profissional.hasMany(Atendimento, {
-    foreignKey: "medicoId",
-    as: "atendimentos"
-});
-
-Atendimento.belongsTo(Profissional, {
-    foreignKey: "medicoId",
-    as: "medicoAtendimento"
-});
-
 module.exports = {
-    Profissional,
-    Paciente,
+    Atendimento,
     Consulta,
-    Atendimento
-};
-
+    Paciente,
+    Profissional
+}

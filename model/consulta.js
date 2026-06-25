@@ -32,7 +32,7 @@ const Consulta = sequelize.define("Consulta", {
         type: DataTypes.DATEONLY
     },
     hora_consulta:{
-        type: DataTypes.TIME
+        type: DataTypes.STRING
     },
     tipo:{
         type: DataTypes.ENUM('primeira_consulta', 'retorno', 'emergencia')

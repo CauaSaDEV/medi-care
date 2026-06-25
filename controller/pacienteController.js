@@ -70,20 +70,6 @@ const criar = async (req, res) => {
         }
 
     }
-    const desativar = async (req, res) => {
-        try {
-            const paciente = await Paciente.findByPk(req.params.id);
-            if (!paciente) {
-                return res.status(404).json({ Erro: "Paciente nao encontrado" });
-            }
-            await paciente.update({ ativo: false, updatedBy: req.user.id });
-            res.json({ mensagem: 'Paciente desativado com sucesso' });
-
-
-        } catch (err) {
-            res.status(500).json({ erro: 'Erro ao desativar paciente' });
-        }
-    }
     const excluir = async (req, res)=>{
         try{
             const paciente = await Paciente.findByPk(req.params.id);
@@ -98,5 +84,5 @@ const criar = async (req, res) => {
         }
         
     }
-    module.exports = { listar, buscar, criar, atualizar, desativar, excluir };
+    module.exports = { listar, buscar, criar, atualizar, excluir };
 
